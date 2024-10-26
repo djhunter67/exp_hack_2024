@@ -3,8 +3,8 @@ from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse
 from fastapi.responses import FileResponse
-from models import create_db_and_tables, save_message,  SessionDep
-from sqlmodel import select
+from pydantic import BaseModel
+from models import JSONModel
 
 app = FastAPI(
     title="eXp 2024 Hacking",
@@ -15,65 +15,28 @@ app = FastAPI(
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
+data = JSONModel("database.json")
+
+class Message(BaseModel):
+    message: str
 
 @app.get("/", response_class=HTMLResponse)
-async def root(request: Request, session: SessionDep):
+async def root(request: Request):
     # Get all the messages from the database
-    messages = session.exec(select(str)).all()
+    messages = data.read_all()
     return templates.TemplateResponse(
-        request=request, name="index.html", context={"request": request, "messages": messages}
+        request=request,
+        name="index.html",
+        context={"request": request, "messages": messages},
     )
 
 
 @app.post("/twilio/whatsapp")
-async def read_results(message: str):
-    save_message(message)
-    return message
+async def read_results(message: Message):
+    data.create({"message": message.message})
+    return {"message": message.message}
 
 
 @app.get("/favicon.ico")
 async def favicon():
     return FileResponse("static/imgs/ca_icon.ico")
-
-
-@app.on_event("startup")
-def on_startup():
-    create_db_and_tables()
-
-
-# @app.post("/messagees/", response_model=MessagePublic)
-# def create_message(message: MessageCreate, session: SessionDep):
-#     return save_message(session, message)
-
-
-# @app.get("/messagees/", response_model=list[MessagePublic])
-# def read_messagees(
-#     session: SessionDep,
-#     offset: int = 0,
-#     limit: Annotated[int, Query(le=100)] = 100,
-# ):
-#     messagees = session.exec(select(Message).offset(offset).limit(limit)).all()
-#     return messagees
-
-
-# @app.get("/messagees/{message_id}", response_model=MessagePublic)
-# def read_message(message_id: int, session: SessionDep):
-#     message = session.get(Message, message_id)
-#     if not message:
-#         raise HTTPException(status_code=404, detail="Message not found")
-#     return message
-
-
-# @app.patch("/messagees/{message_id}", response_model=MessagePublic)
-# def update_a_message(message_id: int, message: MessageUpdate, session: SessionDep):
-#     return update_message(message_id, message, session)
-
-# @app.delete("/messagees/{message_id}")
-# def delete_message(message_id: int, session: SessionDep):
-#     message = session.get(Message, message_id)
-#     if not message:
-#         raise HTTPException(status_code=404, detail="Message not found")
-#     session.delete(message)
-#     session.commit()
-#     return {"ok": True}
-
