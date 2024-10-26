@@ -23,7 +23,7 @@ async def root(request: Request):
 
 @app.post("/twilio/whatsapp")
 async def read_results():
-
+    print("post request received")
     return {}
 
 
