@@ -97,7 +97,7 @@ async def root(request: Request):
 
 
 @app.post("/twilio/whatsapp")
-async def read_results(message: FormData):
+async def read_results(message: Form(...)):
     id = str(uuid.uuid4())
     account_sid: str = Form(...),
     api_version: str = Form(...),
@@ -120,7 +120,6 @@ async def read_results(message: FormData):
     tags: Dict[str, str] = Form(...),
     to: str = Form(...),
     uri: str = Form(...),
-
 
     data.create({
         "id": id,
