@@ -15,10 +15,12 @@ auth_token = os.getenv("AUTH_TOKEN")
 client = Client(account_sid, auth_token)
 
 message = client.messages.create(
-  from_='+18779165060',
-  body='TEST MESSAGE',
-  to='+18777804236'
+  from_='whatsapp:+14155238886',
+  content_sid='HXb5b62575e6e4ff6129ad7c8efe1f983e',
+  content_variables='{"1":"12/1","2":"3pm"}',
+  to='whatsapp:+16036822835'
 )
+
 print(message.sid)
 
 def main():
