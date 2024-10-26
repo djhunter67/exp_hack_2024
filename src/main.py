@@ -4,7 +4,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
-from models import JSONModel
+from .models import JSONModel
 import uuid
 
 app = FastAPI(
