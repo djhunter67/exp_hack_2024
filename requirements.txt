@@ -9,10 +9,12 @@ certifi==2024.8.30
 charset-normalizer==3.4.0
 click==8.1.7
 dnspython==2.7.0
+docstring-to-markdown==0.15
 email_validator==2.2.0
 fastapi==0.115.3
 fastapi-cli==0.0.5
 frozenlist==1.5.0
+greenlet==3.1.1
 gunicorn==23.0.0
 h11==0.14.0
 httpcore==1.0.6
@@ -21,6 +23,7 @@ httpx==0.27.2
 idna==3.10
 inflection==0.5.1
 itsdangerous==2.2.0
+jedi==0.19.1
 Jinja2==3.1.4
 jsonschema==4.23.0
 jsonschema-specifications==2024.10.1
@@ -31,6 +34,8 @@ multidict==6.1.0
 openapi==2.0.0
 orjson==3.10.10
 packaging==24.1
+parso==0.8.4
+pluggy==1.5.0
 propcache==0.2.0
 pydantic==2.9.2
 pydantic-extra-types==2.9.0
@@ -39,6 +44,8 @@ pydantic_core==2.23.4
 Pygments==2.18.0
 PyJWT==2.9.0
 python-dotenv==1.0.1
+python-lsp-jsonrpc==1.1.2
+python-lsp-server==1.12.0
 python-multipart==0.0.12
 PyYAML==6.0.2
 referencing==0.35.1
@@ -47,6 +54,8 @@ rich==13.9.3
 rpds-py==0.20.0
 shellingham==1.5.4
 sniffio==1.3.1
+SQLAlchemy==2.0.36
+sqlmodel==0.0.22
 starlette==0.41.0
 twilio==9.3.6
 typer==0.12.5
