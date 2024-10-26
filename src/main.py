@@ -5,6 +5,7 @@ from fastapi.responses import HTMLResponse
 from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from models import JSONModel
+import uuid
 
 app = FastAPI(
     title="eXp 2024 Hacking",
@@ -33,10 +34,19 @@ async def root(request: Request):
 
 @app.post("/twilio/whatsapp")
 async def read_results(message: Message):
-    data.create({"message": message.message})
-    return {"message": message.message}
+    id = str(uuid.uuid4())
+    data.create({
+        "id": id,
+        "message": message.message
+    })
+    return {
+        "success": True,
+        "id": id
+    }
 
 
 @app.get("/favicon.ico")
 async def favicon():
     return FileResponse("static/imgs/ca_icon.ico")
+
+
