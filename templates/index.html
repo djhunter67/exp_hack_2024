@@ -8,5 +8,11 @@
   </head>
   <body>
     <div id="app">{{request}}</div>
+    <h1> MESSAGES </h1>
+    <ul>
+      {% for message in messages %}
+      <li>{{message}}</li>
+      {% endfor %}
+    </ul>    
   </body>
 </html1>
