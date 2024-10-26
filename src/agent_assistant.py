@@ -38,12 +38,16 @@ completion = client.chat.completions.create(
 print(completion.choices[0].message.content)
 
 # Define the base URL and assistant ID
-BASE_URL = "https://api.assistant.com/v2"  # Replace with actual URL if different
+BASE_URL = "https://api.openai.com/v1"  # Replace with actual URL if different
 ASSISTANT_ID = "asst_V1okPJeX2iccB92fsBhzfGXa"  # Replace with your actual assistant ID
+
+my_assistant = client.beta.assistants.retrieve(ASSISTANT_ID)
+print(my_assistant)
+
 
 # Function to send a query to the assistant
 def send_query(assistant_id, query):
-    url = f"{BASE_URL}/assistant/{assistant_id}"
+    url = f"{BASE_URL}/assistants/{assistant_id}"
     headers = {
         "Content-Type": "application/json",
         "Authorization": f"Bearer {open_ai_key}"  # If authentication is required
