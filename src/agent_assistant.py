@@ -11,31 +11,21 @@ account_sid = os.getenv("ACCOUNT_SID")
 auth_token = os.getenv("AUTH_TOKEN")
 open_ai_key = os.getenv("OPEN_AI_KEY")
 
-client = Client(account_sid, auth_token)
 
-message = client.messages.create(
-  from_='whatsapp:+14155238886',
-  body ='HELLO WORLD',
-#   content_sid='HXb5b62575e6e4ff6129ad7c8efe1f983e',
-#   content_variables='{"1":"12/1","2":"3pm"}',
-  to='whatsapp:+16036822835'
-)
+client = OpenAI(api_key=open_ai_key)
 
+# completion = client.chat.completions.create(
+#     model="gpt-4o",
+#     messages=[
+#         {"role": "system", "content": "You are a helpful assistant."},
+#         {
+#             "role": "user",
+#             "content": "Write a haiku about recursion in programming."
+#         }
+#     ]
+# )
 
-client = OpenAI()
-
-completion = client.chat.completions.create(
-    model="gpt-4o",
-    messages=[
-        {"role": "system", "content": "You are a helpful assistant."},
-        {
-            "role": "user",
-            "content": "Write a haiku about recursion in programming."
-        }
-    ]
-)
-
-print(completion.choices[0].message.content)
+# print(completion.choices[0].message.content)
 
 # Define the base URL and assistant ID
 BASE_URL = "https://api.openai.com/v1"  # Replace with actual URL if different
@@ -87,4 +77,25 @@ def continue_conversation():
 
 # Start the conversation
 if __name__ == "__main__":
-    continue_conversation()
+    # continue_conversation()
+
+    client = Client(account_sid, auth_token)
+
+    message = client.messages.create(
+      from_='whatsapp:+14155238886',
+      body =continue_conversation,
+    #   content_sid='HXb5b62575e6e4ff6129ad7c8efe1f983e',
+    #   content_variables='{"1":"12/1","2":"3pm"}',
+      to='whatsapp:+16036822835'
+    )
+
+
+client = Client(account_sid, auth_token)
+
+message = client.messages.create(
+  from_='whatsapp:+14155238886',
+  body ='HELLO WORLD',
+#   content_sid='HXb5b62575e6e4ff6129ad7c8efe1f983e',
+#   content_variables='{"1":"12/1","2":"3pm"}',
+  to='whatsapp:+16036822835'
+)
