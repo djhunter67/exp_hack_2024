@@ -6,8 +6,9 @@ from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from .models import JSONModel
 import uuid
-from typing import Dict, Any, Optional
+from typing import Dict, Optional
 from fastapi.middleware.cors import CORSMiddleware
+from twilio.twiml.messaging_response import MessagingResponse
 
 app = FastAPI(
     title="eXp 2024 Hacking",
@@ -97,53 +98,22 @@ async def root(request: Request):
 
 
 @app.post("/twilio/whatsapp")
-async def read_results(message: Form(...)):
+async def read_results(request: Request, From: str = Form(...), Body: str = Form(...)):
     id = str(uuid.uuid4())
-    account_sid: str = Form(...),
-    api_version: str = Form(...),
-    body: str = Form(...),
-    date_created: str = Form(...),
-    date_sent: str = Form(...),
-    date_updated: str = Form(...),
-    direction: str = Form(...),
-    error_code: Optional[str] = Form(None),
-    error_message: Optional[str] = Form(None),
-    from_: str = Form(..., alias="from"),
-    num_media: str = Form(...),
-    num_segments: str = Form(...),
-    price: Optional[str] = Form(None),
-    price_unit: Optional[str] = Form(None),
-    messaging_service_sid: str = Form(...),
-    sid: str = Form(...),
-    status: str = Form(...),
-    subresource_uris: Dict[str, str] = Form(...),
-    tags: Dict[str, str] = Form(...),
-    to: str = Form(...),
-    uri: str = Form(...),
+    # response = MessagingResponse()
 
+    form_ = await request.form()
+
+    body = form_.get("Body")
+    from_ = form_.get("From")
+    to = form_.get("To")
+    
+    
     data.create({
         "id": id,
-        "account_sid": account_sid,
-        "api_version": api_version,
-        "body": body,
-        "date_created": date_created,
-        "date_sent": date_sent,
-        "date_updated": date_updated,
-        "direction": direction,
-        "error_code": error_code,
-        "error_message": error_message,
         "from": from_,
-        "num_media": num_media,
-        "num_segments": num_segments,
-        "price": price,
-        "price_unit": price_unit,
-        "messaging_service_sid": messaging_service_sid,
-        "sid": sid,
-        "status": status,
-        "subresource_uris": subresource_uris,
-        "tags": tags,
         "to": to,
-        "uri": uri,
+        "body": body,       
     })
     return {
         "success": True,
