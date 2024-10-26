@@ -60,11 +60,11 @@ async def root(request: Request):
 
 
 @app.post("/twilio/whatsapp")
-async def read_results(message: Message):
+async def read_results(message: Dict[str, Any]):
     id = str(uuid.uuid4())
     data.create({
         "id": id,
-        "message": message.dict()
+        "message": message
     })
     return {
         "success": True,
