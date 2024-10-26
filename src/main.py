@@ -7,6 +7,7 @@ from pydantic import BaseModel
 from .models import JSONModel
 import uuid
 from typing import Dict, Any
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(
     title="eXp 2024 Hacking",
@@ -20,9 +21,14 @@ templates = Jinja2Templates(directory="templates")
 data = JSONModel("database.json")
 
 
-"""
-{'id': '5df9eba6-2c6a-4c5f-911c-2c0d650277b5', 'message': {'account_sid': 'ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'api_version': '2010-04-01', 'body': 'Your appointment is coming up on July 21 at 3PM', 'date_created': 'Thu, 24 Aug 2023 05:01:45 +0000', 'date_sent': 'Thu, 24 Aug 2023 05:01:45 +0000', 'date_updated': 'Thu, 24 Aug 2023 05:01:45 +0000', 'direction': 'outbound-api', 'error_code': None, 'error_message': None, 'from': 'whatsapp:+552120420682', 'num_media': '0', 'num_segments': '1', 'price': None, 'price_unit': None, 'messaging_service_sid': 'MGaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'sid': 'SMaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'status': 'queued', 'subresource_uris': {'media': '/2010-04-01/Accounts/ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Messages/SMaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Media.json'}, 'tags': {'campaign_name': 'Spring Sale 2022', 'message_type': 'cart_abandoned'}, 'to': 'whatsapp:+13233633791', 'uri': '/2010-04-01/Accounts/ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Messages/SMaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.json'}}
-"""
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows all origins
+    allow_credentials=True,
+    allow_methods=["*"],   # Allows all methods (GET, POST, PUT, DELETE, etc.)
+    allow_headers=["*"],   # Allows all headers
+)
+
 class Message(BaseModel):
     account_sid: str
     api_version: str

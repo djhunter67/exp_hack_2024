@@ -354,4 +354,36 @@
       "uri": "/2010-04-01/Accounts/ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Messages/SMaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.json"
     }
   }
+][
+  {
+    "id": "ace71eb3-9423-450d-a73d-dfec7e9d3f5a",
+    "message": {
+      "account_sid": "ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "api_version": "2010-04-01",
+      "body": "Your appointment is coming up on July 21 at 3PM",
+      "date_created": "Thu, 24 Aug 2023 05:01:45 +0000",
+      "date_sent": "Thu, 24 Aug 2023 05:01:45 +0000",
+      "date_updated": "Thu, 24 Aug 2023 05:01:45 +0000",
+      "direction": "outbound-api",
+      "error_code": null,
+      "error_message": null,
+      "from": "whatsapp:+552120420682",
+      "num_media": "0",
+      "num_segments": "1",
+      "price": null,
+      "price_unit": null,
+      "messaging_service_sid": "MGaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "sid": "SMaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "status": "queued",
+      "subresource_uris": {
+        "media": "/2010-04-01/Accounts/ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Messages/SMaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Media.json"
+      },
+      "tags": {
+        "campaign_name": "Spring Sale 2022",
+        "message_type": "cart_abandoned"
+      },
+      "to": "whatsapp:+13233633791",
+      "uri": "/2010-04-01/Accounts/ACaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/Messages/SMaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.json"
+    }
+  }
 ]
