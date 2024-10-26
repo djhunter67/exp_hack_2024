@@ -98,22 +98,17 @@ async def root(request: Request):
 
 
 @app.post("/twilio/whatsapp")
-async def read_results(request: Request, From: str = Form(...), Body: str = Form(...)):
+async def read_results(request: Request):
     id = str(uuid.uuid4())
     # response = MessagingResponse()
 
-    form_ = await request.form()
+    form_data = await request.form()
 
-    body = form_.get("Body")
-    from_ = form_.get("From")
-    to = form_.get("To")
-    
+    data_dict = dict(form_data)
     
     data.create({
         "id": id,
-        "from": from_,
-        "to": to,
-        "body": body,       
+        "data": data_dict
     })
     return {
         "success": True,
