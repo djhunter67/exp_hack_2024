@@ -3,6 +3,10 @@ from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse
 from fastapi.responses import FileResponse
+from pydantic import BaseModel
+
+class Message(BaseModel):
+    whatsapp: str
 
 app = FastAPI(
     title="eXp 2024 Hacking",
@@ -22,9 +26,8 @@ async def root(request: Request):
 
 
 @app.post("/twilio/whatsapp")
-async def read_results():
-    print("post request received")
-    return {}
+async def read_results(message: Message):
+    return message
 
 
 @app.get("/favicon.ico")

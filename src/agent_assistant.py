@@ -3,6 +3,7 @@ from twilio import Client
 from os import load_dotenv
 import os
 
+
 load_dotenv()  # load environment variables from .env file
 
 account_sid = os.getenv("ACCOUNT_SID")
@@ -19,7 +20,6 @@ message = client.messages.create(
 
 print(message.sid)
 
-
 client = OpenAI()
 completion = client.chat.completions.create(
     model="gpt-4o",
@@ -27,3 +27,5 @@ completion = client.chat.completions.create(
         {"role": "user", "content": "write a haiku about ai"}
     ]
 )
+
+
