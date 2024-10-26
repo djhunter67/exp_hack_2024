@@ -1,8 +1,7 @@
 from openai import OpenAI
-from twilio import Client
-from os import load_dotenv
+from twilio.rest import Client
+from dotenv import load_dotenv
 import os
-
 
 load_dotenv()  # load environment variables from .env file
 
@@ -18,7 +17,6 @@ message = client.messages.create(
   to='whatsapp:+16036822835'
 )
 
-print(message.sid)
 
 client = OpenAI()
 completion = client.chat.completions.create(
