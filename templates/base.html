@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% block head %}
+    <link href="{{ url_for('static', path='/css/style.css') }}" rel="stylesheet">
+    <title>{% block title %}{% endblock %} - TREX 2</title>
+    {% endblock %}
+  </head>
+  <body>
+    <div id="template_pages">
+      {% block content %}
+      
+      {% endblock %}
+    </div>
+    <div id="footer">
+      {% block footer %}
+      &copy; Copyright 2024 by <a href="https://stealthrf.com/">StealthRF</a>.
+      {% endblock %}
+    </div>
+  </body>
+</html>
