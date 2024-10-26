@@ -21,9 +21,10 @@ async def root(request: Request):
     )
 
 
-@app.get("/results/{result_id}")
-async def read_results(result_id):
-    return {"identified": result_id}
+@app.post("/twilio/whatsapp")
+async def read_results():
+
+    return {}
 
 
 @app.get("/favicon.ico")
